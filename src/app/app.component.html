@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+  <h2>Accordion</h2>
+  <div *ngFor="let section of sections; let i = index">
+    <button class="accordion" (click)="expand(i)">{{ section.name }}</button>
+    <div class="panel" [ngClass]="{ visible: currentIndex === i }">
+      <p>{{ section.content }}</p>
+
+      <div *ngFor="let se of secc">
+        <input type="checkbox" (change)="onCheckboxChange($event)" />
+        {{ se.sec }}
+      </div>
+    </div>
+  </div>
+
+  <p class="error" *ngIf="this.form.controls['checkArray'].errors?.required">
+    checkbox is required
+  </p>
+
+  <button
+    value="submit"
+    type="button"
+    [disabled]="this.form.controls['checkArray'].errors?.required"
+  >
+    submit
+  </button>
+</form>
